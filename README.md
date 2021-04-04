@@ -32,6 +32,7 @@ To run tests:
     rails test
 ```
 
+
 ## Migrations
 1. Create a new migration, e.g. to create a `users` table
 ```
@@ -39,13 +40,28 @@ To run tests:
 ```
 2. Modify newly created migration file
 3. Execute migration: `rake db:migrate`
-4. To undo changes: `rake db:rollback`
+4. To undo the last migration: `rake db:rollback`
+
+
+## Controllers
+1. Create a new controller
+```
+    rails generate controller users
+```
+2. Edit the controller file
+
+
+## Adding gems
+Gems are ruby packages. To install a new package
+1. Add the gem and its version to Gemfile
+2. Run `bundle install`
 
 
 ## Deploy
 Prereqs:
 1. Install heroku: `curl https://cli-assets.heroku.com/install.sh | sh`
 2. Log in: `heroku login -i`
+3. Set up remote for heroku `heroku git:remote -a pomodoro-up`
 
 To deploy:
 1. TODO

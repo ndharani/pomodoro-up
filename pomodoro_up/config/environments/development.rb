@@ -76,4 +76,5 @@ Rails.application.configure do
   
   # Add domains to allow them to host this app, ex: 
   # config.hosts << "mydomain.com"
+  config.hosts << "ndharani-pomodoro-up-ph5x-3000.githubpreview.dev"
 end
