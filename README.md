@@ -26,6 +26,12 @@ If you get a "Blocked host" error, follow the suggestion to add your domain to t
 ```
 Restart the server if needed.
 
+
+## User Experience
+1. Sign up at `/signup`
+2. Log in at `/login` and get redirected to your homepage
+
+
 ## Tests
 To run tests:
 ```

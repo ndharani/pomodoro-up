@@ -1,7 +1,22 @@
-<h3>Welcome!</h3>
+<% if current_user == @user %>
 
-<div>
-  Username: <%= @user.username %>
-  Email: <%= @user.email %>
-  User ID: <%= @user.id %>
-</div>
+  <h2>Home Page</h2>
+  <h3> <%= "Hi, #{@user.username}" %> </h3>
+
+  <div>
+    Username: <%= @user.username %>
+    Email: <%= @user.email %>
+    User ID: <%= @user.id %>
+  </div>
+
+<% else %>
+
+  <h3>Not authorized</h3>
+  <p>
+    <%= link_to "Go to my homepage", user_path(current_user) %>
+  </p>
+  <p>
+    <%= link_to "Login", get_login_path%>
+  </p>
+
+<% end %>
