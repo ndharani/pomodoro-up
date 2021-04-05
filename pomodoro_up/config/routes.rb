@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new"
   get "/login", to: "users#login", as: "get_login"
   post "/login", to: "users#submit_login", as: "submit_login"
+  post "/logout", to: "users#logout", as: "logout"
 end

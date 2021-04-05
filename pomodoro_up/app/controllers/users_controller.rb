@@ -56,6 +56,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # post /logout
+  def logout
+    session[:user_id] = nil
+    redirect_to get_login_path
+  end
+
   # /users/:id
   def show
     @user = User.find(params[:id])

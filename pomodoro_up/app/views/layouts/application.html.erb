@@ -13,4 +13,11 @@
   <body>
     <%= yield %>
   </body>
+
+  <%# TODO: remove login link when already on login page %>
+  <% if logged_in? %>
+    <%= button_to "Logout", logout_path %>
+  <% else %>
+    <%= button_to "Login Page", get_login_path, method: :get %>
+  <% end %>
 </html>
