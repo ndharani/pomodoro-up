@@ -1,4 +1,4 @@
-<% if current_user == @user %>
+<% if current_user == @user && !current_user.nil? %>
 
   <h2>Home Page</h2>
   <h3> <%= "Hi, #{@user.username}" %> </h3>

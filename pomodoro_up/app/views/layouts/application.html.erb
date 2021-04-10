@@ -12,12 +12,17 @@
 
   <body>
     <%= yield %>
+
+    <%# TODO: remove login link when already on login page %>
+    <%# TODO: why does logging out still display Logout button at /login %>
+    <div>
+      <br/>
+      <% if logged_in? %>
+        <%= button_to "Logout", logout_path, method: :post %>
+      <% else %>
+        <%= button_to "Login Page", get_login_path, method: :get %>
+      <% end %>
+    </div>
   </body>
 
-  <%# TODO: remove login link when already on login page %>
-  <% if logged_in? %>
-    <%= button_to "Logout", logout_path %>
-  <% else %>
-    <%= button_to "Login Page", get_login_path, method: :get %>
-  <% end %>
 </html>

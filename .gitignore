@@ -1,0 +1,5 @@
+# this is the general .gitignore for the project
+# the rails app has its own .gitignore
+
+# Ignore virtualenv config
+.venv/*

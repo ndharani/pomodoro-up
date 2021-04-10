@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:show]
+  before_action :current_user
+  before_action :logged_in?
 
   # /users
   def index
@@ -13,13 +14,10 @@ class UsersController < ApplicationController
 
   # post /signup
   def create
-    credentials = {
-      "username": params[:user][:username],
-      "email": params[:user][:email],
-      "password": params[:user][:password],
-    }
-    @user = User.create(credentials)
+    @user = User.create(signup_params)
     if @user.valid?
+      # consider user logged in
+      session[:user_id] = @user.id
       redirect_to user_path(@user)
     else  
       # TODO: bubble up errors on signup page
@@ -36,13 +34,11 @@ class UsersController < ApplicationController
 
   # post /login
   def submit_login
-    email = params[:users][:email]
-    password = params[:users][:password]
-    user = User.find_by(email: email)
+    user = User.find_by(email: login_params[:email])
     if user
-      if user.authenticate(password)
+      if user.authenticate(login_params[:password])
+        # consider user logged in
         session[:user_id] = user.id
-        puts("user", user, user.id, session[:user_id])
         redirect_to user_path(user)
       else
         errors["Password Error"] = "Incorrect password for email #{email}"
@@ -50,8 +46,8 @@ class UsersController < ApplicationController
         redirect_to get_login_path
       end
     else
-      errors["User Error"] = "No user with email #{email}"
-      puts("No user with email #{email}")
+      errors["User Error"] = "No user with email #{login_params[:email]}"
+      puts("No user with email #{login_params[:email]}")
       redirect_to get_login_path
     end
   end
@@ -59,11 +55,25 @@ class UsersController < ApplicationController
   # post /logout
   def logout
     session[:user_id] = nil
-    redirect_to get_login_path
+    render "logout"
   end
 
   # /users/:id
   def show
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      @user = nil
+    end
+  end
+
+  private
+
+  def signup_params
+    params.require(:user).permit(:username, :email, :password)
+  end
+
+  def login_params
+    params.require(:users).permit(:email, :password)
   end
 end
