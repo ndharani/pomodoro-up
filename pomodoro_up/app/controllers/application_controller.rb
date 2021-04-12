@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :errors, :current_user, :logged_in?
+  helper_method :errors, :current_user, :logged_in?, :authorize
 
   def errors
     {}
@@ -15,5 +15,11 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_user.nil?
+  end
+
+  def authorize
+    if !logged_in?
+      redirect_to users_path
+    end
   end
 end
