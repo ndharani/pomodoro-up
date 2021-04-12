@@ -1,5 +1,7 @@
 class TaskListsController < ApplicationController
     before_action :authorize
+    has_many :tasks
+
     # /task_lists
     def index
         @task_lists = current_user.task_lists

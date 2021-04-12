@@ -10,14 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_222024) do
+ActiveRecord::Schema.define(version: 2021_04_12_230357) do
 
   create_table "task_lists", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "user_id"
     t.string "status", default: "active"
     t.integer "pomodoros_started", default: 0
     t.integer "pomodoros_completed", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "task_list_id"
+    t.string "name", null: false
+    t.string "status", default: "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
