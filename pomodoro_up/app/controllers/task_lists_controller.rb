@@ -7,6 +7,9 @@ class TaskListsController < ApplicationController
 
     # /task_lists
     def show
-        @task_list = TaskList.find(params[:id])
+        @task_list = TaskList.find_by(id: params[:id], user_id: current_user.id)
+        if @task_list.nil?
+            render "not_found"
+        end
     end
 end

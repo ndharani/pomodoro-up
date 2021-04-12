@@ -29,3 +29,8 @@ User.create(users)
 # Create task lists
 u1 = User.find(1)
 u1.task_lists.create(name: "Daily Todo")
+
+u2 = User.find(2)
+u2.task_lists.create(name: "4/19 Todo")
+u2.task_lists.create(name: "4/20 Todo")
+u2.task_lists.create(name: "4/21 Todo")
