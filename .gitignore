@@ -2,4 +2,7 @@
 # the rails app has its own .gitignore
 
 # Ignore virtualenv config
-.venv/*
+.venv
+
+# Ignore bundle config
+.bundle

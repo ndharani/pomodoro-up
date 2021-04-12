@@ -1,0 +1,44 @@
+version: "3"
+networks:
+    development:
+    test:
+volumes:
+    gem_cache:
+services:
+    pomodoro_up_app:
+        build: .
+        container_name: pomodoro_up_app
+        volumes:
+            - .:/var/pomodoro_up
+            - ./dev-entrypoint.sh:/usr/local/bin/dev-entrypoint.sh
+            - gem_cache:/usr/local/bundle/gems
+        networks:
+            - development
+        ports:
+            - 3000:3000
+        stdin_open: true
+        tty: true
+        env_file: .env.development
+        entrypoint: dev-entrypoint.sh
+        command: ["rails", "server", "-p", "3000", "--binding", "0.0.0.0"]
+        environment:
+            RAILS_ENV: development
+            DOCKERIZED: "true"
+    pomodoro_up_test:
+        build: .
+        container_name: pomodoro_up_test
+        volumes:
+            - .:/var/pomodoro_up
+            - gem_cache:/usr/local/bundle/gems
+        networks:
+            - test
+        ports:
+            - 3001:3000
+        stdin_open: true
+        tty: true
+        env_file: .env.test
+        entrypoint: test-entrypoint.sh
+        command: ["rails", "-v"]
+        environment:
+            RAILS_ENV: test
+            DOCKERIZED: "true"
