@@ -1,7 +1,9 @@
 <div>
     <h3><%= @task_list.name %></h3>
 
-    <!-- TODO: add tasks -->
+    <% @task_list.tasks.each do |t| %>
+        <p> <%= t.name %> </p>
+    <% end %>
 
     <p>Status: <%= @task_list.status %> </p>
     <p>List created at: <%= @task_list.created_at %> </p>
