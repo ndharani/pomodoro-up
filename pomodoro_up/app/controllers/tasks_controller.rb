@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-    before_action :current_task, only: [:destroy]
+    before_action :current_task, except: [:create]
+    before_action :task_status, except: [:create]
 
     # Notes
       # 1. We soft delete tasks. Deleted tasks should not show up in the UI,
@@ -20,9 +21,21 @@ class TasksController < ApplicationController
       end
     end
 
+    # GET /task_lists/:task_list_id/tasks/:task_id/mark_active
+    def mark_active
+      current_task.update(status: @active_task_status)
+      redirect_to current_task.task_list
+    end
+
+    # GET /task_lists/:task_list_id/tasks/:task_id/mark_finished
+    def mark_finished
+      current_task.update(status: @finished_task_status)
+      redirect_to current_task.task_list
+    end
+
     # DELETE /task_lists/:task_list_id/tasks/:task_id
     def destroy
-      current_task.update(status: destroyed_status)
+      current_task.update(status: @deleted_task_status)
       redirect_to current_task.task_list
     end
 
@@ -30,10 +43,6 @@ class TasksController < ApplicationController
     
     def current_task
       Task.find(params[:id])
-    end
-
-    def destroyed_status
-      'deleted'
     end
 
     def new_task_params

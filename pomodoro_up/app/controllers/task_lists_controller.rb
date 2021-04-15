@@ -1,5 +1,6 @@
 class TaskListsController < ApplicationController
     before_action :authorize
+    before_action :task_status, only: [:show]
 
     # /task_lists
     def index
@@ -13,7 +14,7 @@ class TaskListsController < ApplicationController
             render "not_found"
         end
 
-        @active_tasks = @task_list.tasks.where.not(status: "deleted").all
+        @active_tasks = @task_list.tasks.where.not(status: @deleted_task_status).all
         @new_task = @task_list.tasks.new
     end
 end
