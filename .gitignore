@@ -6,3 +6,6 @@
 
 # Ignore bundle config
 .bundle
+
+# Ignore project todo file
+todo
