@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # Task lists & tasks
   resources :task_lists do
     resources :tasks
+    get "/task/:id/mark_active", to: "tasks#mark_active", as: "mark_task_active"
+    get "/task/:id/mark_finished", to: "tasks#mark_finished", as: "mark_task_finished"
   end
 
 end

@@ -27,11 +27,13 @@
 
     <!-- tasks -->
     <!-- TODO: remove status from tasks table -->
+
     <table class="table text-left">
         <thead>
             <tr>
                 <th class="col-md">Task</th>
-                <th class="col-md"></th>
+                <th class="col-md">Action</th>
+                <th class="col-md">Delete</th>
                 <th class="col-md">Status</th>
             </tr>
         </thead>
@@ -42,14 +44,21 @@
                 <%= form_for [@task_list, @new_task] do |f| %>
                     <% f.options[:html][:role] = 'form' %>
                     <td><%= f.text_field :name, class: "form-control", placeholder: "Add a new task" %></td>
-                    <td><%= f.submit class: "btn btn btn-primary" %><td>
+                    <td><%= f.submit class: "btn btn-link" %><td>
                     <td></td>
                 <% end %>
             </tr>
             <!-- list tasks -->
             <% @active_tasks.each do |task| %>
                 <tr>
-                    <td><input class="checkbox" type="checkbox"> <%= task.name %></td>
+                    <td><%= task.name %></td>
+                    <td>
+                        <% if task.status == @active_task_status %>
+                            <%= link_to "Mark Done", task_list_mark_task_finished_path(@task_list, task) %>
+                        <% else %>
+                            <%= link_to "Mark Active", task_list_mark_task_active_path(@task_list, task)  %>
+                        <% end %>
+                    </td>
                     <td><%= link_to "Delete", [@task_list, task],  method: :delete, data: { confirm: "Are you sure?" } %></td>
                     <td><%= task.status %></td>
                 </tr>
