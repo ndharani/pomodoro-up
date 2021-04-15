@@ -1,0 +1,42 @@
+class TasksController < ApplicationController
+    before_action :current_task, only: [:destroy]
+
+    # Notes
+      # 1. We soft delete tasks. Deleted tasks should not show up in the UI,
+      #    but they are not permanently deleted from the database
+      # 2. When a task list is deleted, all of its tasks are hard deleted
+      #    TODO: turn hard deletes into soft deletes
+
+    # POST /task_lists/:task_list_id/tasks
+    def create
+      puts params
+      task_list = TaskList.find(params[:task_list_id])
+      task = task_list.tasks.create(new_task_params)
+      if task.valid?
+        redirect_to task.task_list
+      else  
+        # TODO: bubble up errors
+        puts "CREATE TASK ERROR"
+      end
+    end
+
+    # DELETE /task_lists/:task_list_id/tasks/:task_id
+    def destroy
+      current_task.update(status: destroyed_status)
+      redirect_to current_task.task_list
+    end
+
+    private
+    
+    def current_task
+      Task.find(params[:id])
+    end
+
+    def destroyed_status
+      'deleted'
+    end
+
+    def new_task_params
+      params.require(:task).permit(:name)
+    end
+end

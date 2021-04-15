@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post "/login", to: "users#submit_login", as: "submit_login"
   post "/logout", to: "users#logout", as: "logout"
 
-  # Task lists
-  resources :task_lists
+  # Task lists & tasks
+  resources :task_lists do
+    resources :tasks
+  end
+
 end

@@ -9,7 +9,7 @@
                 Status: <%= @task_list.status %>
             </div>
             <div class="col-md-6">
-                List created at: <%= @task_list.created_at %>
+                List created at: <%= @task_list.created_at.strftime("%m/%d/%Y %H:%M") %>
             </div>
         </div>
         <div class="row">
@@ -23,30 +23,38 @@
     </div>
 
     <hr/>
-
-    <!-- add a new task -->
-    <!-- TODO: submit will create a task in the DB & trigger refresh -->
-    <div class="form-group">
-        <form role="form">
-            <input type="text" class="form-control" placeholder="Your Task" name="task">
-        </form>
-        <button type="button" class="btn btn btn-primary">Add</button>
-    </div>
+    <br/><br/><br/>
 
     <!-- tasks -->
-    <ul class="list-unstyled" id="todo">
-        <% @task_list.tasks.each do |t| %>
-            <li>
-                <div class="form-check"> 
-                    <label class="form-check-label"> 
-                        <input class="checkbox" type="checkbox"> 
-                        <%= t.name %> 
-                        <i class="input-helper"></i>
-                    </label> 
-                    <i class="remove mdi mdi-close-circle-outline"></i>
-                </div>
-            </li>
-        <% end %>
-    </ul>
+    <!-- TODO: remove status from tasks table -->
+    <table class="table text-left">
+        <thead>
+            <tr>
+                <th class="col-md">Task</th>
+                <th class="col-md"></th>
+                <th class="col-md">Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- add tasks -->
+            <tr>
+                <%= form_for [@task_list, @new_task] do |f| %>
+                    <% f.options[:html][:role] = 'form' %>
+                    <td><%= f.text_field :name, class: "form-control", placeholder: "Add a new task" %></td>
+                    <td><%= f.submit class: "btn btn btn-primary" %><td>
+                    <td></td>
+                <% end %>
+            </tr>
+            <!-- list tasks -->
+            <% @active_tasks.each do |task| %>
+                <tr>
+                    <td><input class="checkbox" type="checkbox"> <%= task.name %></td>
+                    <td><%= link_to "Delete", [@task_list, task],  method: :delete, data: { confirm: "Are you sure?" } %></td>
+                    <td><%= task.status %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 
 </div>
