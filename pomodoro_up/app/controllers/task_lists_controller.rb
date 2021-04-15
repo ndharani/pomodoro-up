@@ -12,5 +12,8 @@ class TaskListsController < ApplicationController
         if @task_list.nil?
             render "not_found"
         end
+
+        @active_tasks = @task_list.tasks.where.not(status: "deleted").all
+        @new_task = @task_list.tasks.new
     end
 end
