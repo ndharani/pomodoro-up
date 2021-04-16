@@ -10,10 +10,10 @@ class TaskListsController < ApplicationController
 
     # POST /task_lists
   def create
-    task_list = TaskList.create(name: new_task_list_params[:name], user_id: current_user.id)
+    task_list_name = new_task_list_params[:name]
+    task_list = TaskList.create(name: task_list_name, user_id: current_user.id)
     if !task_list.valid?
-      # TODO: bubble up errors
-      puts "CREATE TASK LIST ERROR"
+      flash[:alert] = "Error creating task list #{task_list_name}"
     end
     redirect_to task_lists_path
   end
@@ -22,6 +22,7 @@ class TaskListsController < ApplicationController
   def show
     @task_list = TaskList.find_by(id: params[:id], user_id: current_user.id)
     if @task_list.nil?
+      flash[:alert] = "Task list not found"
       render "not_found"
       return
     end

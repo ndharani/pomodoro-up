@@ -6,6 +6,13 @@
     <div>
         <h4>Add a new task list</h4>
         <%= form_for @new_task_list do |f| %>
+            <% if @new_task_list.errors.any? %>
+                <div class="alert alert-danger">
+                    <% @new_task_list.errors.full_messages.each do |message| %>
+                        <div><%= message %></div>
+                    <% end %>
+                </div>
+            <% end %>
             <% f.options[:html][:role] = "form" %>
             <p><%= f.text_field :name, class: "form-control", placeholder: "Name of your task list" %></p>
             <p><%= f.submit "Add task list", class: "btn btn-primary" %><p>

@@ -19,8 +19,8 @@ class UsersController < ApplicationController
       # consider user logged in
       session[:user_id] = @user.id
       redirect_to user_path(@user)
-    else  
-      # TODO: bubble up errors on signup page
+    else
+      flash[:alert] = "Invalid username, email, and/or password"
       render "signup_error"
     end
   end
@@ -40,16 +40,14 @@ class UsersController < ApplicationController
         # consider user logged in
         session[:user_id] = user.id
         redirect_to user_path(user)
+        return
       else
-        errors["Password Error"] = "Incorrect password for email #{email}"
-        puts("Incorrect password for email #{email}")
-        redirect_to get_login_path
+        flash[:alert] = "Incorrect password for email #{login_params[:email]}"
       end
     else
-      errors["User Error"] = "No user with email #{login_params[:email]}"
-      puts("No user with email #{login_params[:email]}")
-      redirect_to get_login_path
+      flash[:alert] = "No user with email #{login_params[:email]} exists"
     end
+    redirect_to get_login_path
   end
 
   # post /logout

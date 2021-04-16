@@ -12,12 +12,10 @@ class TasksController < ApplicationController
     def create
       task_list = TaskList.find(params[:task_list_id])
       task = task_list.tasks.create(new_task_params)
-      if task.valid?
-        redirect_to task.task_list
-      else  
-        # TODO: bubble up errors
-        puts "CREATE TASK ERROR"
+      if !task.valid?
+        flash[:alert] = "Error creating task #{new_task_params[:name]}"
       end
+      redirect_to task.task_list
     end
 
     # GET /task_lists/:task_list_id/tasks/:task_id/mark_active
