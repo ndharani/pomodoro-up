@@ -1,7 +1,26 @@
-<div>
+<div class="container">
     <h3>Your Task Lists</h3>
+    <br/><br/>
 
-    <% @task_lists.each do |tl| %>
-        <p> <%= link_to tl.name, task_list_path(tl) %> </p>
-    <% end %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-3">Task List</th>
+                <th class="col-md-3">Active Tasks</th>
+                <th class="col-md-3">Finished Tasks</th>
+                <th class="col-md-3">List Created At</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @task_lists.each do |task_list| %>
+                <tr>
+                    <td><%= link_to task_list.name, task_list_path(task_list) %></td>
+                    <td><%= task_list.active_tasks.count %></td>
+                    <td><%= task_list.finished_tasks.count %></td>
+                    <td><%= task_list.created_at.strftime("%m/%d/%Y %H:%M") %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

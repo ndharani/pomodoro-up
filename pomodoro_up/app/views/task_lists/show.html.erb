@@ -6,18 +6,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                Status: <%= @task_list.status %>
+                List Status: <%= @task_list.status %>
             </div>
             <div class="col-md-6">
-                List created at: <%= @task_list.created_at.strftime("%m/%d/%Y %H:%M") %>
+                Active Tasks: <%= @task_list.active_tasks.count %>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                Pomodoros started: <%= @task_list.pomodoros_started %>
+                List Created At: <%= @task_list.created_at.strftime("%m/%d/%Y %H:%M") %>
             </div>
             <div class="col-md-6">
-                Pomodoros completed: <%= @task_list.pomodoros_completed %>
+                Finished Tasks: <%= @task_list.finished_tasks.count %>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
             <!-- add tasks -->
             <tr>
                 <%= form_for [@task_list, @new_task] do |f| %>
-                    <% f.options[:html][:role] = 'form' %>
+                    <% f.options[:html][:role] = "form" %>
                     <td><%= f.text_field :name, class: "form-control", placeholder: "Add a new task" %></td>
                     <td><%= f.submit class: "btn btn-link" %><td>
                     <td></td>
