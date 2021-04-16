@@ -3,6 +3,13 @@
 
     <div>
         <%= form_for @user, url: users_path(@user) do |f| %>
+            <% if @user.errors.any? %>
+                <div class="alert alert-danger">
+                    <% @user.errors.full_messages.each do |message| %>
+                        <div><%= message %></div>
+                    <% end %>
+                </div>
+            <% end %>
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
             <% f.options[:html][:role] = "form" %>
             <p><%= f.text_field :username, class: "form-control", placeholder: "Username" %></p>

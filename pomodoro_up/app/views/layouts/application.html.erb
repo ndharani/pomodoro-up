@@ -53,7 +53,14 @@
       </div>
     </nav>
 
-    <%= yield %>
+    <div>
+      <!-- flash alert messages -->
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-danger" %>
+      <% end %>
+
+      <%= yield %>
+    </div>
 
   </body>
 
