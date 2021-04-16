@@ -23,9 +23,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # for views
   def task_status
-    @active_task_status = "active"
-    @finished_task_status = "done"
-    @deleted_task_status = "deleted"
+    @active_task_status = Task.active_task_status
+    @finished_task_status = Task.finished_task_status
+    @deleted_task_status = Task.deleted_task_status
   end
 end

@@ -23,19 +23,19 @@ class TasksController < ApplicationController
 
     # GET /task_lists/:task_list_id/tasks/:task_id/mark_active
     def mark_active
-      current_task.update(status: @active_task_status)
+      current_task.update(status: Task.active_task_status)
       redirect_to current_task.task_list
     end
 
     # GET /task_lists/:task_list_id/tasks/:task_id/mark_finished
     def mark_finished
-      current_task.update(status: @finished_task_status)
+      current_task.update(status: Task.finished_task_status)
       redirect_to current_task.task_list
     end
 
     # DELETE /task_lists/:task_list_id/tasks/:task_id
     def destroy
-      current_task.update(status: @deleted_task_status)
+      current_task.update(status: Task.deleted_task_status)
       redirect_to current_task.task_list
     end
 
