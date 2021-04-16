@@ -1,6 +1,6 @@
 # pomodoro-up
 
-Gamify getting your tasks done with Pomodoro timers. Pomodoro Up is a Rails 6.1 app running on Ruby 2.7.2 and deployed to Heroku. It has a test suite which should be run before commiting to the master branch.
+Gamify getting your tasks done with Pomodoro timers. Pomodoro Up is a Rails 6.1 app running on Ruby 2.7.2 and deployed to Heroku.
 
 ## Local setup
 
@@ -65,6 +65,7 @@ Restart the server if needed.
 
 1. Sign up at `/signup`
 2. Log in at `/login` and get redirected to your homepage
+3. See your task lists at `/task_lists`
 
 ## Tests
 
@@ -100,12 +101,19 @@ To run tests:
 
 2. Edit the controller file
 
-## Adding gems
+## Adding packages
+
+#### Adding gems
 
 Gems are ruby packages. To install a new package
 
 1. Add the gem and its version to Gemfile
 2. Run `docker-compose run --rm pomodoro_up_app bundle install`
+
+#### Adding JavaScript packages
+
+    yarn add [package-name]
+    docker-compose up pomodoro_up_app
 
 ## Deploy
 
@@ -126,10 +134,4 @@ Remediation:
 a) `killall ruby` to kill running ruby pids
 b) remove the tmp/pids/server.pid file
 
-## Todo
-
--   System dependencies
--   Configuration
--   Database creation
--   Database initialization
--   Services (job queues, cache servers, search engines, etc.)
+Generally, if something errors/breaks, try shutting the app down and bringing it back up.
