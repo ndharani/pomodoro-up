@@ -66,6 +66,7 @@ Restart the server if needed.
 1. Sign up at `/signup`
 2. Log in at `/login` and get redirected to your homepage
 3. See your task lists at `/task_lists`
+4. Start a pomodoro timer and manage your task list
 
 ## Tests
 
@@ -119,13 +120,31 @@ Gems are ruby packages. To install a new package
 
 Prereqs:
 
-1. Install heroku: `curl https://cli-assets.heroku.com/install.sh | sh`
-2. Log in: `heroku login -i`
-3. Set up remote for heroku `heroku git:remote -a pomodoro-up`
+1.  Install heroku: `curl https://cli-assets.heroku.com/install.sh | sh`
+2.  Log in: `heroku login -i`
 
 To deploy:
 
-1. TODO
+1.  Log in to Container Registry
+
+    $ heroku container:login
+
+2.  Push your Docker-based app
+    Build the Dockerfile in the current directory and push the Docker image.
+
+        $ heroku container:push web
+
+3.  Deploy the changes
+    Release the newly pushed images to deploy the app.
+
+        $ heroku container:release web
+
+Useful commands
+
+-   `heroku open` to open the website
+-   `heroku logs` to see build logs, app logs, etc
+
+For more information: https://devcenter.heroku.com/articles/container-registry-and-runtime
 
 ## Troubleshooting
 
