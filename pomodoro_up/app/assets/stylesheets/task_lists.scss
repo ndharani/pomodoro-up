@@ -4,15 +4,45 @@
 form {
     display: inline-block;
 }
+
 .form-group {
     text-align: center;
     padding-bottom: 25px;
 }
-#todo {
-    margin: 0 auto;
-    width: 500px;
-}
 
 a.close {
     float: right;
+}
+
+// TIMER
+
+.bg-tomato-gradient {
+    background: #ff416c;
+    background: -webkit-linear-gradient(to left, #e2ab1f, #eb492c);
+    background: linear-gradient(to left, #e2ab1f, #eb492c);
+}
+
+.rounded {
+    border-radius: 1rem !important;
+}
+
+.clock {
+    font-size: 64px;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.btn-timer {
+    padding: 0.5rem 2rem !important;
+    border-radius: 30rem !important;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold !important;
+}
+
+.btn-timer:hover,
+.btn-timer:focus {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.5);
 }
