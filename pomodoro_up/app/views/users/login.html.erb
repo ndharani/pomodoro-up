@@ -1,9 +1,18 @@
-<h2> Log In </h2>
+<div class="container">
+    <h2> Log In </h2>
 
-<div class="log-in-form">
-    <%= form_for :users do |f| %>
-        <p><%= f.text_field :email, placeholder: "Email address" %></p>
-        <p><%= f.text_field :password, placeholder: "Password" %></p>
-        <p><%= f.submit "Log in" %></p>
-    <% end %>
+    <div>
+        <%= form_for :users do |f| %>
+            <% f.options[:html][:role] = "form" %>
+            <p><%= f.text_field :email, class: "form-control", placeholder: "Email address" %></p>
+            <p><%= f.text_field :password, class: "form-control", placeholder: "Password" %></p>
+            <p><%= f.submit "Log in", class: "btn btn-primary" %></p>
+        <% end %>
+    <div>
+
+    <div>
+        <br/>
+        <p>Or sign up instead</p>
+        <%= button_to "Sign Up", signup_path, class: "btn btn-primary", method: :get %>
+    </div>
 <div>
