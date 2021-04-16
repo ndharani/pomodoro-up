@@ -1,23 +1,30 @@
-<% if current_user == @user && !current_user.nil? %>
+<div class="container">
+  <% if current_user == @user && !current_user.nil? %>
 
-  <h2>Home Page</h2>
-  <h3> <%= "Hi, #{@user.username}" %> </h3>
+    <h2>Home Page</h2>
+    <br/>
+    <h3> <%= "Hi, #{@user.username}" %> </h3>
+    <br/>
 
-  <div>
-    <p>Username: <%= @user.username %></p>
-    <p>Email: <%= @user.email %></p>
-    <p>User ID: <%= @user.id %></p>
-    <p><%= link_to "Go to my task lists", task_lists_path(@user) %></p>
-  </div>
+    <div>
+      <p>Username: <%= @user.username %></p>
+      <p>Email: <%= @user.email %></p>
+      <p>User ID: <%= @user.id %></p>
+      <p><%= link_to "Go to my task lists", task_lists_path(@user) %></p>
+    </div>
 
-<% else %>
+  <% else %>
 
-  <h3>Not authorized</h3>
-  <p>
-    <%= link_to "Go to my homepage", user_path(current_user) %>
-  </p>
-  <p>
-    <%= link_to "Login", get_login_path%>
-  </p>
+    <h3>Not authorized</h3>
+    <% if logged_in? %>
+      <p>
+        <%= link_to "Go to my homepage", user_path(current_user) %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to "Login", get_login_path%>
+      </p>
+    <% end %>
 
-<% end %>
+  <% end %>
+</div>
