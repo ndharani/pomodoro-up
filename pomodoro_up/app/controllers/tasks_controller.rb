@@ -10,7 +10,6 @@ class TasksController < ApplicationController
 
     # POST /task_lists/:task_list_id/tasks
     def create
-      puts params
       task_list = TaskList.find(params[:task_list_id])
       task = task_list.tasks.create(new_task_params)
       if task.valid?
